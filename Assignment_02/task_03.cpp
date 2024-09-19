@@ -18,7 +18,7 @@ public:
     }
     void printProgression(int n)
     {
-        cout << current;
+        cout <<"\t"<< current;
         for (int i = 1; i < n; i++)
         {
             cout << " " << nextValue();
