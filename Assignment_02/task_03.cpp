@@ -25,6 +25,11 @@ public:
         }
         cout << endl;
     }
+    virtual long firstValue()
+    {
+        cur = first;
+        return cur;
+    }
 
     // Function to get the next value of the progression
     virtual long nextValue()
@@ -32,11 +37,31 @@ public:
         return ++cur;
     }
 };
-
-int main()
+class AbsDiffProgression : public Progression
 {
-    Progression prog(1);
-    prog.printProgression(10); // Prints the first 10 values of the progression starting from 1
+private:
+    long prev; // Previous value in the progression
 
-    return 0;
-}
+public:
+    // Default constructor starting with 2 and 200
+    AbsDiffProgression() : Progression(2), prev(200) {}
+
+    // Parametric constructor starting with specified pair of numbers
+    AbsDiffProgression(long first, long second) : Progression(first), prev(second) {}
+
+    // Function to get the next value of the progression
+    virtual long nextValue() override
+    {
+        long temp = prev;
+        prev = cur;
+        cur = (cur > temp) ? (cur - temp) : (temp - cur); // Absolute difference
+        return cur;
+    }
+
+    // Function to reset the progression to the first value
+    virtual long firstValue() override
+    {
+        cur = first;
+        return cur;
+    }
+};
